@@ -14,6 +14,7 @@ let appleIndex = 0
 let points = 0
 let snakeSpeed = 1000
 let speedUp = 100
+let speedLimit = 400
 let timerId = 0
 
 function createGrid() {
@@ -39,8 +40,6 @@ function startGame() {
     currentSnake.forEach(index => squares[index].classList.remove('snake'))
     //remove the apple
     squares[appleIndex].classList.remove('apple')
-    //clear timer interval
-    clearInterval(timerId)
     //reset array
     currentSnake = [2,1,0]
     //reset points 
@@ -49,12 +48,14 @@ function startGame() {
     score.textContent = points
     //reset start direction to move right
     direction = 1
-    //reset intervalTime
-    intervalTime = 1000
     //new apple
     generateApple()
     //re add the class of snake to our new currentSnake
     currentSnake.forEach(index => squares[index].classList.add('snake'))
+    //clear timer interval
+    clearInterval(timerId)
+    //reset snakeSpeed
+    snakeSpeed = 1000
     //start snake movement at snakespeed
     timerId = setInterval(move, snakeSpeed)
 }
@@ -92,10 +93,10 @@ function move() {
         score.innerHTML = points
         //speed up our snake, but put a limit on maximum speed at 400ms
         clearInterval(timerId)
-        if (snakeSpeed >= 400) {
+        if (snakeSpeed > speedLimit) {
             timerId = setInterval(move, snakeSpeed -= speedUp)
         } else {
-            timerId = setInterval(move, 400)
+            timerId = setInterval(move, speedLimit)
         }
     }
     squares[currentSnake[0]].classList.add('snake')
