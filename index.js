@@ -39,21 +39,25 @@ function startGame() {
     currentSnake.forEach(index => squares[index].classList.remove('snake'))
     //remove the apple
     squares[appleIndex].classList.remove('apple')
-    
+    //clear timer interval
     clearInterval(timerId)
+    //reset array
     currentSnake = [2,1,0]
+    //reset points 
     points = 0
     //re add new score to browser
     score.textContent = points
+    //reset start direction to move right
     direction = 1
+    //reset intervalTime
     intervalTime = 1000
+    //new apple
     generateApple()
     //re add the class of snake to our new currentSnake
     currentSnake.forEach(index => squares[index].classList.add('snake'))
-    
-    timerId = setInterval(move, intervalTime)
+    //start snake movement at snakespeed
+    timerId = setInterval(move, snakeSpeed)
 }
-
 
 function move() {
     if (
@@ -71,9 +75,8 @@ function move() {
     squares[tail].classList.remove('snake')
     //add square in direction we are heading
     currentSnake.unshift(currentSnake[0] + direction)
-    //add styling so we can see it
     
-    //deal with snake head gets apple
+    //deal with when snake head gets apple
     if (squares[currentSnake[0]].classList.contains('apple')) {
         //remove the class of apple
         squares[currentSnake[0]].classList.remove('apple')
@@ -81,15 +84,13 @@ function move() {
         squares[tail].classList.add("snake")
        //grow our snake array
         currentSnake.push(tail)
-        console.log(currentSnake)
-        
         //generate new apple
         generateApple()
         //add one to the score
         points++
         //display our score
         score.innerHTML = points
-        //speed up our snake
+        //speed up our snake, but put a limit on maximum speed at 400ms
         clearInterval(timerId)
         if (snakeSpeed >= 400) {
             timerId = setInterval(move, snakeSpeed -= speedUp)
@@ -108,6 +109,7 @@ function generateApple() {
 } 
 generateApple()
 
+//directional control with keyboard arrows
 // 39 is right arrow
 // 38 is for the up arrow
 // 37 is for the left arrow
