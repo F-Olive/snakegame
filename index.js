@@ -2,6 +2,7 @@ const upBtn = document.getElementById("upBtn")
 const dnBtn = document.getElementById("dnBtn")
 const ltBtn = document.getElementById("ltBtn")
 const rtBtn = document.getElementById("rtBtn")
+
 const grid = document.querySelector('.grid')
 const startButton = document.getElementById('start')
 const score = document.getElementById('score')
@@ -114,19 +115,33 @@ generateApple()
 
 function control(e) {
     if (e.keyCode === 39) {
-        console.log('right pressed')
+
         direction = 1
     } else if (e.keyCode === 38) {
-        console.log('up pressed')
+
         direction = -width
     } else if (e.keyCode === 37) {
-        console.log('left pressed')
+
         direction = -1
     } else if (e.keyCode === 40) {
-        console.log('down pressed')
+
         direction = +width
     }
 }
-document.addEventListener('keydown', control)
 
-startButton.addEventListener('click', startGame)
+document.addEventListener('keydown', control) //directional control with keyboard arrows
+
+startButton.addEventListener('click', startGame) //Click the "Start/Restart" button
+
+upBtn.addEventListener("click", function (){      //directional control using onscreen buttons (smartphone or tablet)
+direction = -width
+}) 
+dnBtn.addEventListener("click", function(){
+    direction = +width
+})
+ltBtn.addEventListener("click", function(){
+    direction = -1
+})
+rtBtn.addEventListener("click", function(){
+    direction = 1
+})
