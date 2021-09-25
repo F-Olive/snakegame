@@ -38,5 +38,7 @@
 
 .btn {
     padding: 20px;
-    background-color: white;
+    background: linear-gradient(#e66465, #9198e5);
+    border: solid 1px black;
+    border-radius: 50%;
 }
