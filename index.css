@@ -1,6 +1,7 @@
-html, body {
-    margin-left: 10px;
-    padding: 10;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .grid {
@@ -22,4 +23,20 @@ html, body {
 
 .apple {
     background-color: red;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+}
+
+.rowAlign {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn {
+    padding: 20px;
+    background-color: white;
 }
